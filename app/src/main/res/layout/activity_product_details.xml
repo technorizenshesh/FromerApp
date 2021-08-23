@@ -1,0 +1,492 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <RelativeLayout
+            android:id="@+id/RRToolbar"
+            android:background="@color/purple_200"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_50sdp"
+            >
+
+            <RelativeLayout
+                android:id="@+id/RR_back"
+                android:layout_alignParentLeft="true"
+                android:visibility="visible"
+                android:layout_width="@dimen/_50sdp"
+                android:layout_height="match_parent"
+                >
+
+                <ImageView
+                    android:src="@mipmap/back"
+                    android:layout_centerInParent="true"
+                    android:layout_width="@dimen/_20sdp"
+                    android:layout_height="@dimen/_20sdp">
+
+                </ImageView>
+
+            </RelativeLayout>
+
+            <TextView
+                android:id="@+id/title"
+                android:layout_centerInParent="true"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:textSize="@dimen/_16sdp"
+                android:text="Product Details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            </TextView>
+
+
+        </RelativeLayout>
+
+        <androidx.core.widget.NestedScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/_180sdp">
+
+                    <ImageView
+                        android:id="@+id/img1"
+                        android:scaleType="fitXY"
+                        android:src="@mipmap/details"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        >
+                    </ImageView>
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content">
+
+                        <androidx.cardview.widget.CardView
+                            app:cardElevation = "16dp"
+                            android:layout_margin="@dimen/_5sdp"
+                            app:cardCornerRadius = "160dp"
+                            android:layout_width = "@dimen/_35sdp"
+                            android:layout_height = "@dimen/_35sdp"
+                            >
+
+                            <ImageView
+                                android:layout_gravity="center"
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="@dimen/_20sdp"
+                                android:scaleType="centerInside"
+                                android:src="@mipmap/fit"/>
+
+
+                        </androidx.cardview.widget.CardView>
+
+
+                        <androidx.cardview.widget.CardView
+                            app:cardElevation = "16dp"
+                            android:layout_margin="@dimen/_5sdp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            app:cardCornerRadius = "160dp"
+                            android:layout_width = "@dimen/_35sdp"
+                            android:layout_height = "@dimen/_35sdp"
+                            >
+
+                            <ImageView
+                                android:layout_gravity="center"
+                                android:layout_width="@dimen/_30sdp"
+                                android:layout_height="@dimen/_30sdp"
+                                android:scaleType="centerInside"
+                                android:src="@mipmap/filter"/>
+
+
+                        </androidx.cardview.widget.CardView>
+
+
+
+                    </RelativeLayout>
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <TextView
+                        android:visibility="gone"
+                        android:id="@+id/txt_EMPTY"
+                        android:layout_centerInParent="true"
+                        android:textColor="@color/black"
+                        android:textSize="@dimen/_16sdp"
+                        android:text="No Data Found"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content">
+
+                    </TextView>
+
+                    <ProgressBar
+                        android:id="@+id/progressBar"
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/progresh_background"
+                        android:elevation="6dp"
+                        android:indeterminate="true"
+                        android:indeterminateTint="@color/purple_200"
+                        android:indeterminateTintMode="src_atop"
+                        android:padding="5dp"
+                        android:visibility="gone" />
+
+
+                    <LinearLayout
+                        android:orientation="vertical"
+                        android:padding="@dimen/_10sdp"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        >
+
+                        <TextView
+                            android:id="@+id/txt_name"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="Laddha Anaaj Mandi"
+                            android:textColor="@color/orange"
+                            android:textSize="@dimen/_20sdp"
+                            android:textStyle="bold" />
+
+                        <LinearLayout
+                            android:visibility="visible"
+                            android:layout_marginTop="@dimen/_5sdp"
+                            android:orientation="horizontal"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:src="@mipmap/loc"
+                                android:layout_width="@dimen/_20sdp"
+                                android:layout_height="@dimen/_20sdp">
+
+                            </ImageView>
+
+                            <TextView
+                                android:id="@+id/txt_address"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="1st Block 1st cross,Rammurthy nagar"
+                                android:textColor="@color/purple_200"
+                                android:textSize="@dimen/_14sdp"
+                                />
+
+                        </LinearLayout>
+
+                        <View
+                            android:background="@color/natural_gray"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_width="match_parent"
+                            android:layout_height="1sp"
+                            >
+
+                        </View>
+
+
+
+                        <TextView
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="About"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_16sdp"
+                            android:textStyle="bold" />
+
+
+                        <TextView
+                            android:id="@+id/txtabout"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="I am a specialist massage therapist with 4 year experience specialisting in thai massage,hare is some more text to fill up space about his blurb here. simply dummy text of the printing and typesetting industry. Lorem ipsum has been the industry standarddummy"
+                            android:textColor="@color/black"
+                            android:textSize="@dimen/_14sdp"
+                            />
+
+                        <View
+                            android:background="@color/natural_gray"
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_width="match_parent"
+                            android:layout_height="1sp"
+                            >
+                        </View>
+
+                        <LinearLayout
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            >
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="Review"
+                                android:textColor="@color/black"
+                                android:textSize="@dimen/_14sdp"
+                                android:textStyle="bold" />
+
+
+                            <TextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:text="(Write your Review )"
+                                android:textColor="@color/orange"
+                                android:textSize="@dimen/_14sdp"
+                                android:textStyle="bold" />
+
+
+                        </LinearLayout>
+
+                        <RelativeLayout
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            >
+
+                            <ImageView
+                                android:layout_alignParentLeft="true"
+                                android:id="@+id/img11"
+                                android:layout_width="@dimen/_50sdp"
+                                android:layout_height="@dimen/_60sdp"
+                                android:adjustViewBounds="true"
+                                android:scaleType="fitCenter"
+                                android:src="@mipmap/avtar" />
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/_10sdp"
+                                android:layout_toRightOf="@+id/img11"
+                                android:orientation="vertical">
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    >
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Samuel"
+                                        android:textColor="@color/purple_200"
+                                        android:textSize="@dimen/_14sdp"
+                                        android:textStyle="bold" />
+
+                                    <LinearLayout
+                                        android:orientation="horizontal"
+                                        android:layout_alignParentRight="true"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        >
+                                        <ImageView
+                                            android:layout_width="@dimen/_10sdp"
+                                            android:layout_height="@dimen/_10sdp"
+                                            android:src="@mipmap/star" />
+
+                                        <ImageView
+                                            android:layout_marginLeft="5sp"
+                                            android:layout_width="@dimen/_10sdp"
+                                            android:layout_height="@dimen/_10sdp"
+                                            android:src="@mipmap/star" />
+
+
+                                        <ImageView
+                                            android:layout_marginLeft="5sp"
+                                            android:layout_width="@dimen/_10sdp"
+                                            android:layout_height="@dimen/_10sdp"
+                                            android:src="@mipmap/star" />
+
+
+                                        <ImageView
+                                            android:layout_marginLeft="5sp"
+                                            android:layout_width="@dimen/_10sdp"
+                                            android:layout_height="@dimen/_10sdp"
+                                            android:src="@mipmap/star" />
+
+                                        <ImageView
+                                            android:layout_marginLeft="5sp"
+                                            android:layout_width="@dimen/_10sdp"
+                                            android:layout_height="@dimen/_10sdp"
+                                            android:src="@mipmap/star" />
+
+
+
+                                    </LinearLayout>
+
+
+                                </RelativeLayout>
+
+
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Wonderful jean,perfect gift for my girl for our anniversary"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_14sdp"
+                                    />
+
+                            </LinearLayout>
+
+
+
+                        </RelativeLayout>
+
+                        <RelativeLayout
+                            android:layout_marginTop="@dimen/_10sdp"
+                            android:id="@+id/RR_fav"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            >
+
+                            <ImageView
+                                android:layout_alignParentLeft="true"
+                                android:id="@+id/img21"
+                                android:layout_width="@dimen/_50sdp"
+                                android:layout_height="@dimen/_60sdp"
+                                android:adjustViewBounds="true"
+                                android:scaleType="fitCenter"
+                                android:src="@mipmap/avtar" />
+
+                            <LinearLayout
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_marginLeft="@dimen/_10sdp"
+                                android:layout_toRightOf="@+id/img21"
+                                android:orientation="vertical">
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    >
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="Laddha Anaaj Mandi"
+                                        android:textColor="@color/purple_200"
+                                        android:textSize="@dimen/_14sdp"
+                                        android:textStyle="bold" />
+
+                                    <LinearLayout
+                                        android:orientation="horizontal"
+                                        android:layout_centerVertical="true"
+                                        android:layout_alignParentRight="true"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        >
+                                        <ImageView
+                                            android:layout_width="@dimen/_10sdp"
+                                            android:layout_height="@dimen/_10sdp"
+                                            android:src="@mipmap/star" />
+
+                                        <ImageView
+                                            android:layout_marginLeft="5sp"
+                                            android:layout_width="@dimen/_10sdp"
+                                            android:layout_height="@dimen/_10sdp"
+                                            android:src="@mipmap/star" />
+
+
+                                        <ImageView
+                                            android:layout_marginLeft="5sp"
+                                            android:layout_width="@dimen/_10sdp"
+                                            android:layout_height="@dimen/_10sdp"
+                                            android:src="@mipmap/star" />
+
+
+                                        <ImageView
+                                            android:layout_marginLeft="5sp"
+                                            android:layout_width="@dimen/_10sdp"
+                                            android:layout_height="@dimen/_10sdp"
+                                            android:src="@mipmap/star" />
+
+                                        <ImageView
+                                            android:layout_marginLeft="5sp"
+                                            android:layout_width="@dimen/_10sdp"
+                                            android:layout_height="@dimen/_10sdp"
+                                            android:src="@mipmap/star" />
+
+
+
+                                    </LinearLayout>
+
+
+                                </RelativeLayout>
+
+
+                                <TextView
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content"
+                                    android:text="Wonderful jean,perfect gift for my girl for our anniversary"
+                                    android:textColor="@color/black"
+                                    android:textSize="@dimen/_14sdp"
+                                    />
+
+                            </LinearLayout>
+
+                        </RelativeLayout>
+
+
+                        <androidx.recyclerview.widget.RecyclerView
+                            android:id="@+id/recycler_allproduct"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:scrollbars="vertical"
+                            android:nestedScrollingEnabled="false"
+                            android:visibility="visible" />
+
+
+                        <TextView
+                            android:id="@+id/loginID"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/iv_Logo"
+                            android:layout_centerHorizontal="true"
+                            android:layout_centerVertical="true"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginTop="@dimen/_15sdp"
+                            android:background="@drawable/btn_bg"
+                            android:elevation="@dimen/_5sdp"
+                            android:gravity="center"
+                            android:padding="@dimen/_12sdp"
+                            android:text="Proceed to order"
+                            android:textAlignment="center"
+                            android:textColor="@color/white"
+                            android:textSize="@dimen/_14sdp"
+                            android:textStyle="bold"
+                            tools:ignore="RtlCompat" />
+
+                    </LinearLayout>
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+        </androidx.core.widget.NestedScrollView>
+
+    </LinearLayout>
+
+
+
+</layout>
