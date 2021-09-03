@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.cardview.widget.CardView
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/_5sdp"
+    app:cardCornerRadius="@dimen/_20sdp"
+    tools:ignore="MissingDefaultResource">
+
+    <LinearLayout
+        android:visibility="visible"
+        android:orientation="vertical"
+        android:layout_below="@+id/RRToolbar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        >
+
+        <LinearLayout
+            android:orientation="vertical"
+            android:padding="@dimen/_10sdp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            >
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                >
+
+                <TextView
+                    android:id="@+id/AddressType"
+                    android:visibility="visible"
+                    android:textStyle="bold"
+                    android:textColor="@color/purple_200"
+                    android:textSize="@dimen/_16sdp"
+                    android:text="Address"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                </TextView>
+
+                <ImageView
+                    android:id="@+id/img_Check"
+                    android:src="@drawable/circle"
+                    android:layout_alignParentRight="true"
+                    android:layout_width="@dimen/_30sdp"
+                    android:layout_height="@dimen/_30sdp"
+                    >
+
+                </ImageView>
+
+            </RelativeLayout>
+
+
+            <TextView
+                android:id="@+id/txtAddress"
+                android:textColor="@color/black"
+                android:textSize="@dimen/_16sdp"
+                android:text="21,Alex Davidson Avenue,Opposite Omegatron Vicent smith Victoria island lagas nigera"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            </TextView>
+
+
+
+        </LinearLayout>
+
+        <View
+            android:background="@color/natural_gray"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_1sdp"
+            ></View>
+
+    </LinearLayout>
+
+</androidx.cardview.widget.CardView>

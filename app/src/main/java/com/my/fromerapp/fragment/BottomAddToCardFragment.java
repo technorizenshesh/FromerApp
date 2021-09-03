@@ -34,7 +34,7 @@ public class BottomAddToCardFragment extends BottomSheetDialogFragment {
     RelativeLayout RRplus;
     TextView txt_quatity;
 
-    int i=0;
+    int i=1;
     String Product_id="";
     String ProductName="";
     String ProductPrice="";
@@ -131,16 +131,13 @@ public class BottomAddToCardFragment extends BottomSheetDialogFragment {
 
                 if (status.equalsIgnoreCase("1")) {
 
+                    ((ProductDetails)context).getFrmdetailsProductseller();
+
                     Toast.makeText(context, finallyPr.getResult()+"", Toast.LENGTH_SHORT).show();
-
                 } else {
-
                     Toast.makeText(context, finallyPr.getMessage(), Toast.LENGTH_SHORT).show();
-
                 }
-
             }
-
             @Override
             public void onFailure(Call<AddToCardModel> call, Throwable t) {
                 Toast.makeText(context, t.getMessage(), Toast.LENGTH_SHORT).show();
@@ -148,5 +145,10 @@ public class BottomAddToCardFragment extends BottomSheetDialogFragment {
         });
     }
 
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
 
+
+    }
 }

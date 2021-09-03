@@ -29,8 +29,6 @@ public class ProducctRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
     private OnItemClickListener mItemClickListener;
     additemListener additemListener;
 
-    int i = 1;
-
     public ProducctRecyclerViewAdapter(Context context, ArrayList<ProductmySellerModelData> modelList, additemListener additemListener) {
         this.mContext = context;
         this.modelList = modelList;
@@ -57,7 +55,7 @@ public class ProducctRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
 
 
             String product_status = model.getProductStatus().toString();
-            i= Integer.parseInt(model.getQuantity().toString());
+           // i= Integer.parseInt(model.getQuantity().toString());
             if (product_status.equalsIgnoreCase("true")) {
                 genericViewHolder.ll_additem.setVisibility(View.VISIBLE);
                 genericViewHolder.txtAdd.setVisibility(View.GONE);
@@ -82,6 +80,8 @@ public class ProducctRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
 
             genericViewHolder.RRplus.setOnClickListener(v -> {
 
+                String quntity =genericViewHolder.txt_quantity.getText().toString();
+                int i= Integer.parseInt(quntity);
                 i++;
                 additemListener.addItem(position,i);
                 genericViewHolder.txt_quantity.setText(i + "");
@@ -89,12 +89,13 @@ public class ProducctRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
             });
 
             genericViewHolder.RR_mnus1.setOnClickListener(v -> {
+                String quntity =genericViewHolder.txt_quantity.getText().toString();
+                int i= Integer.parseInt(quntity);
                 if (i >1) {
                     i--;
                     additemListener.addItem(position,i);
                     genericViewHolder.txt_quantity.setText(i + "");
                 }
-
             });
         }
 

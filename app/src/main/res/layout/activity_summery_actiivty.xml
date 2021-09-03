@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
@@ -8,10 +9,11 @@
         android:layout_height="match_parent">
 
         <RelativeLayout
+            android:background="@color/purple_200"
             android:id="@+id/RRToolbar"
             android:layout_width="match_parent"
             android:layout_height="@dimen/_50sdp"
-            android:background="@color/purple_200">
+           >
 
             <RelativeLayout
                 android:id="@+id/RR_back"
@@ -50,7 +52,7 @@
             android:layout_height="match_parent">
 
             <androidx.cardview.widget.CardView
-                 android:layout_width="match_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/_10sdp"
                 app:cardCornerRadius="@dimen/_20sdp"
@@ -100,7 +102,7 @@
 
             </androidx.cardview.widget.CardView>
 
-            <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+            <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/_10sdp"

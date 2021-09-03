@@ -3,8 +3,11 @@ package com.my.fromerapp.utils;
 import com.my.fromerapp.model.AddToCardModel;
 import com.my.fromerapp.model.ForogtPassword;
 import com.my.fromerapp.model.FrmModel;
+import com.my.fromerapp.model.GetShippingAddress;
+import com.my.fromerapp.model.GteItemProductModel;
 import com.my.fromerapp.model.LoginModel;
 import com.my.fromerapp.model.ProductDetailsMoodel;
+import com.my.fromerapp.model.SelectedAddreessModel;
 import com.my.fromerapp.model.SubCategoryModel;
 
 import okhttp3.MultipartBody;
@@ -26,6 +29,12 @@ public interface Api {
     String get_firm_details ="get_firm_details";
     String firm_details_byID ="firm_details_byID";
     String add_to_cart_buyer ="add_to_cart_buyer";
+    String get_card_buyer ="get_card_buyer";
+    String delete_card ="delete_card";
+    String get_shipping_address ="get_shipping_address";
+    String remove_ship_address ="remove_ship_address";
+    String update_is_select ="update_is_select";
+    String add_shipping_address ="add_shipping_address";
 
     @FormUrlEncoded
     @POST(buyer_login)
@@ -82,12 +91,56 @@ public interface Api {
     );
 
     @FormUrlEncoded
+    @POST(get_card_buyer)
+    Call<GteItemProductModel>get_card_buyer(
+            @Field("buyer_id") String buyer_id
+    );
+
+    @FormUrlEncoded
+    @POST(get_shipping_address)
+    Call<GetShippingAddress>get_shipping_address(
+            @Field("user_id") String user_id
+    );
+
+    @FormUrlEncoded
+    @POST(update_is_select)
+    Call<SelectedAddreessModel>update_is_select(
+            @Field("user_id") String user_id,
+            @Field("id") String id
+    );
+
+
+    @FormUrlEncoded
+    @POST(add_shipping_address)
+    Call<AddToCardModel>add_shipping_address(
+            @Field("user_id") String user_id,
+            @Field("addressType") String addressType,
+            @Field("street_address1") String street_address1,
+            @Field("street_address2") String street_address2,
+            @Field("city") String city,
+            @Field("state") String state,
+            @Field("country") String country
+    );
+
+    @FormUrlEncoded
     @POST(add_to_cart_buyer)
     Call<AddToCardModel>add_to_cart_buyer(
             @Field("seller_id") String seller_id,
             @Field("buyer_id") String buyer_id,
             @Field("product_id") String product_id,
             @Field("qty") String qty
+    );
+
+    @FormUrlEncoded
+    @POST(delete_card)
+    Call<AddToCardModel>delete_card(
+            @Field("card_id") String card_id
+    );
+
+    @FormUrlEncoded
+    @POST(remove_ship_address)
+    Call<AddToCardModel>remove_ship_address(
+            @Field("id") String id
     );
 
 }

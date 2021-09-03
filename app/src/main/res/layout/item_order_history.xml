@@ -149,13 +149,9 @@
                             android:textSize="@dimen/_12sdp"
                             />
 
-
-
                     </RelativeLayout>
 
                 </LinearLayout>
-
-
 
             </LinearLayout>
 

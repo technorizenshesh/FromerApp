@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+<manifest
+    xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.my.fromerapp"
     android:versionCode="1"
     android:versionName="1.0">
@@ -20,8 +21,13 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.FromerApp">
-        <activity android:name=".act.MywishList"></activity>
-        <activity android:name=".act.AddShippingAddress"></activity>
+
+        <activity android:name=".act.SummeryActiivty"></activity>
+        <activity android:name=".act.AddPaymentCart" />
+        <activity android:name=".act.GtePaymentCartActivity" />
+        <activity android:name=".act.GetCartItemsActivity" />
+        <activity android:name=".act.MywishList" />
+        <activity android:name=".act.AddShippingAddress" />
         <activity android:name=".act.ShipppingAddress" />
         <activity android:name=".act.OrderHistory" />
         <activity android:name=".act.Notification" />

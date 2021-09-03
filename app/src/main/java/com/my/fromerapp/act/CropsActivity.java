@@ -42,7 +42,7 @@ public class CropsActivity extends AppCompatActivity {
 
         binding.title.setText(title);
 
-        binding.RRBack.setOnClickListener(v -> {
+     binding.RRBack.setOnClickListener(v -> {
             onBackPressed();
         });
 

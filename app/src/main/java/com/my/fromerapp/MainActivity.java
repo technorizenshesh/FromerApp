@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.google.android.gms.auth.api.Auth;
+import com.my.fromerapp.act.GetCartItemsActivity;
 import com.my.fromerapp.fragment.ChatFragment;
 import com.my.fromerapp.fragment.HomeFragment;
 import com.my.fromerapp.databinding.ActivityMainBinding;
@@ -78,9 +79,11 @@ public class MainActivity extends AppCompatActivity {
             binding.imgProfile.setImageResource(R.mipmap.profile);
             binding.imgOrder.setImageResource(R.mipmap.my_order_green);
 
-            fragment = new MyOrderFragment();
-            loadFragment(fragment);
+            startActivity(new Intent(MainActivity.this, GetCartItemsActivity.class));
 
+            /*fragment = new MyOrderFragment();
+            loadFragment(fragment);
+*/
         });
 
         binding.RRChat.setOnClickListener(v -> {

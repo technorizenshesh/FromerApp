@@ -54,6 +54,15 @@
                     android:textSize="@dimen/_12sdp"
                    />
 
+                <TextView
+                    android:id="@+id/txtQuntity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Quantity :"
+                    android:textColor="@color/orange"
+                    android:textSize="@dimen/_12sdp"
+                    />
+
                 <LinearLayout
                     android:id="@+id/ll_additem"
                     android:visibility="gone"
@@ -138,16 +147,17 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             >
+
             <TextView
+                android:id="@+id/txtDelete"
                 android:padding="@dimen/_2sdp"
                 android:layout_marginRight="@dimen/_10sdp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/delete"
-                android:textColor="@color/red"
+                android:textColor="#FF5D58"
                 android:textSize="@dimen/_18sdp"
                 />
-
 
             <TextView
                 android:padding="@dimen/_2sdp"
@@ -156,14 +166,12 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/wishlist"
-                android:textColor="@color/yellow"
+                android:textColor="#FFC517"
                 android:textSize="@dimen/_18sdp"
                />
 
         </RelativeLayout>
-
-
-
+        
     </RelativeLayout>
 
 </androidx.cardview.widget.CardView>

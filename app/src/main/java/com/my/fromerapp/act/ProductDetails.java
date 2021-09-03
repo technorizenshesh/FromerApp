@@ -52,13 +52,22 @@ public class ProductDetails extends AppCompatActivity implements additemListener
         if (sessionManager.isNetworkAvailable()) {
 
             binding.progressBar.setVisibility(View.VISIBLE);
-
             getFrmdetailsProductseller();
+
         }else {
-
             Toast.makeText(this, R.string.checkInternet, Toast.LENGTH_SHORT).show();
-
         }
+
+        binding.RRBack.setOnClickListener(v -> {
+
+              onBackPressed();
+        });
+
+        binding.txtProcced.setOnClickListener(v -> {
+
+            startActivity(new Intent(ProductDetails.this, GetCartItemsActivity.class));
+
+        });
     }
 
     private void setAdapter(ArrayList<ProductmySellerModelData> modelList) {
@@ -158,8 +167,14 @@ public class ProductDetails extends AppCompatActivity implements additemListener
 
                     Toast.makeText(ProductDetails.this, finallyPr.getResult(), Toast.LENGTH_SHORT).show();
 
+                    binding.progressBar.setVisibility(View.VISIBLE);
+
+                    getFrmdetailsProductseller();
+
                 } else {
+
                     binding.progressBar.setVisibility(View.GONE);
+
                     Toast.makeText(ProductDetails.this, finallyPr.getMessage(), Toast.LENGTH_SHORT).show();
                 }
 
@@ -193,4 +208,16 @@ public class ProductDetails extends AppCompatActivity implements additemListener
         }
     }
 
+     @Override
+     protected void onResume() {
+         super.onResume();
+         if (sessionManager.isNetworkAvailable()) {
+
+             binding.progressBar.setVisibility(View.VISIBLE);
+             getFrmdetailsProductseller();
+
+         }else {
+             Toast.makeText(this, R.string.checkInternet, Toast.LENGTH_SHORT).show();
+         }
+    }
 }

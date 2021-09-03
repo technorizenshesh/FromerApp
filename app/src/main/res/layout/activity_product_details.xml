@@ -80,7 +80,7 @@
                         <androidx.cardview.widget.CardView
                             app:cardElevation = "16dp"
                             android:layout_margin="@dimen/_5sdp"
-                            app:cardCornerRadius = "160dp"
+                            app:cardCornerRadius = "@dimen/_160sdp"
                             android:layout_width = "@dimen/_35sdp"
                             android:layout_height = "@dimen/_35sdp"
                             >
@@ -97,11 +97,11 @@
 
 
                         <androidx.cardview.widget.CardView
-                            app:cardElevation = "16dp"
+                            app:cardElevation = "@dimen/_16sdp"
                             android:layout_margin="@dimen/_5sdp"
                             android:layout_alignParentRight="true"
                             android:layout_centerVertical="true"
-                            app:cardCornerRadius = "160dp"
+                            app:cardCornerRadius = "@dimen/_160sdp"
                             android:layout_width = "@dimen/_35sdp"
                             android:layout_height = "@dimen/_35sdp"
                             >
@@ -458,7 +458,7 @@
 
 
                         <TextView
-                            android:id="@+id/loginID"
+                            android:id="@+id/txtProcced"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:layout_below="@id/iv_Logo"
@@ -486,7 +486,5 @@
         </androidx.core.widget.NestedScrollView>
 
     </LinearLayout>
-
-
 
 </layout>
