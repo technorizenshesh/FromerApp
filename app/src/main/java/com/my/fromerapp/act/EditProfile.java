@@ -24,6 +24,7 @@ import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
+import com.my.fromerapp.MainActivity;
 import com.my.fromerapp.Preference;
 import com.my.fromerapp.R;
 import com.my.fromerapp.databinding.ActivityEditProfileBinding;
@@ -39,9 +40,14 @@ import java.io.IOException;
 import java.util.List;
 
 import id.zelory.compressor.Compressor;
+import okhttp3.MediaType;
+import okhttp3.MultipartBody;
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static com.my.fromerapp.act.SignUpActivity.isValidEmail;
 
 
 public class EditProfile extends AppCompatActivity {
@@ -51,6 +57,10 @@ public class EditProfile extends AppCompatActivity {
     private Uri resultUri;
     private SessionManager sessionManager;
     public static File UserProfile_img, codmpressedImage, compressActualFile;
+    String UserNae="";
+    String Email="";
+    String Mobile="";
+    String Password="";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,6 +68,12 @@ public class EditProfile extends AppCompatActivity {
 
         binding.RRBack.setOnClickListener(v -> {
             onBackPressed();
+        });
+
+        binding.Update.setOnClickListener(v -> {
+
+            validation();
+
         });
 
         sessionManager = new SessionManager(EditProfile.this);
@@ -95,6 +111,40 @@ public class EditProfile extends AppCompatActivity {
                     }).check();
         });
     }
+
+
+    private void validation() {
+
+        UserNae = binding.edtName.getText().toString();
+        Email = binding.etEmaillogin.getText().toString();
+        Mobile = binding.edtMobile.getText().toString();
+
+        if(UserNae.equalsIgnoreCase(""))
+        {
+            Toast.makeText(this, "Please Enter User Name.", Toast.LENGTH_SHORT).show();
+
+        }else if(!isValidEmail(Email))
+        {
+            Toast.makeText(this, "Please Enter email.", Toast.LENGTH_SHORT).show();
+
+        }else if(Mobile.equalsIgnoreCase(""))
+        {
+            Toast.makeText(this, "Please Enter Mobile.", Toast.LENGTH_SHORT).show();
+
+        }else
+        {
+            if (sessionManager.isNetworkAvailable()) {
+
+                binding.progressBar.setVisibility(View.VISIBLE);
+
+                Updateapi();
+
+            }else {
+                Toast.makeText(this, R.string.checkInternet, Toast.LENGTH_SHORT).show();
+            }
+        }
+    }
+
 
     private void showSettingDialogue() {
 
@@ -196,6 +246,61 @@ public class EditProfile extends AppCompatActivity {
 
 
                     Glide.with(EditProfile.this).load(finallyPr.getResult().getImage()).circleCrop().into(binding.imgUserProfile);
+
+                } else {
+                    binding.progressBar.setVisibility(View.GONE);
+                    Toast.makeText(EditProfile.this, finallyPr.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<LoginModel> call, Throwable t) {
+                binding.progressBar.setVisibility(View.GONE);
+                Toast.makeText(EditProfile.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void Updateapi(){
+
+        String UsserId= Preference.get(EditProfile.this,Preference.KEY_user_id);
+
+        MultipartBody.Part imgFile = null;
+        MultipartBody.Part imgFileOne = null;
+
+        if (SignUpActivity.UserProfile_img == null) {
+
+        } else {
+            RequestBody requestFileOne = RequestBody.create(MediaType.parse("image/*"), SignUpActivity.UserProfile_img);
+            imgFile = MultipartBody.Part.createFormData("image", SignUpActivity.UserProfile_img.getName(), requestFileOne);
+        }
+
+        RequestBody Name = RequestBody.create(MediaType.parse("text/plain"), UserNae);
+        RequestBody Usser_Id = RequestBody.create(MediaType.parse("text/plain"), UsserId);
+        RequestBody email = RequestBody.create(MediaType.parse("text/plain"), Email);
+        RequestBody mobile = RequestBody.create(MediaType.parse("text/plain"), Mobile);
+
+        Call<LoginModel> call = RetrofitClients
+                .getInstance()
+                .getApi()
+                .update_buyer_profile(Usser_Id,Name,email,mobile,imgFile);
+
+        call.enqueue(new Callback<LoginModel>() {
+            @Override
+            public void onResponse(Call<LoginModel> call, Response<LoginModel> response) {
+
+                binding.progressBar.setVisibility(View.GONE);
+
+                LoginModel finallyPr = response.body();
+
+                String status = finallyPr.getStatus();
+
+                if (status.equalsIgnoreCase("1")) {
+
+                    Toast.makeText(EditProfile.this, finallyPr.getMessage(), Toast.LENGTH_SHORT).show();
+
+                    startActivity(new Intent(EditProfile.this, MainActivity.class));
 
                 } else {
                     binding.progressBar.setVisibility(View.GONE);

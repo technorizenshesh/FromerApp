@@ -45,6 +45,21 @@
 
         </RelativeLayout>
 
+
+        <ProgressBar
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerInParent="true"
+            android:id="@+id/progressBar"
+            android:background="@drawable/progresh_background"
+            android:elevation="6dp"
+            android:padding="5dp"
+            android:indeterminate="true"
+            android:indeterminateTintMode="src_atop"
+            android:indeterminateTint="@color/purple_200"
+            android:visibility="gone"
+            />
+
         <LinearLayout
             android:layout_below="@+id/RRToolbar"
             android:orientation="vertical"
@@ -52,6 +67,7 @@
             android:layout_height="match_parent">
 
             <androidx.cardview.widget.CardView
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/_10sdp"
@@ -103,6 +119,7 @@
             </androidx.cardview.widget.CardView>
 
             <androidx.cardview.widget.CardView
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/_10sdp"
@@ -150,6 +167,14 @@
 
             </androidx.cardview.widget.CardView>
 
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyclerProduct"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:scrollbars="vertical"
+                android:visibility="visible"
+                />
+
 
             <LinearLayout
                 android:orientation="vertical"
@@ -162,7 +187,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     >
+
                     <TextView
+                        android:id="@+id/txtAddressType"
                         android:textStyle="bold"
                         android:textColor="@color/purple_200"
                         android:textSize="@dimen/_16sdp"
@@ -185,9 +212,10 @@
 
 
                 <TextView
+                    android:id="@+id/txtAddress"
                     android:textColor="@color/black"
                     android:textSize="@dimen/_16sdp"
-                    android:text="21,Alex Davidson Avenue,Opposite Omegatron Vicent smith Victoria island lagas nigera"
+                    android:text="Please Select Address"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
 
@@ -195,10 +223,24 @@
 
             </LinearLayout>
 
+            <RadioButton
+                android:padding="10sp"
+                android:buttonTint="@color/purple_200"
+                android:textSize="@dimen/_18sdp"
+                android:text="Cash"
+                android:checked="true"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            </RadioButton>
+
 
             <TextView
-                android:layout_margin="@dimen/_20sdp"
-                android:id="@+id/loginID"
+                android:layout_marginBottom="@dimen/_20sdp"
+                android:layout_marginTop="@dimen/_50sdp"
+                android:layout_marginRight="@dimen/_20sdp"
+                android:layout_marginLeft="@dimen/_20sdp"
+                android:id="@+id/AddSummery"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/iv_Logo"
@@ -216,10 +258,7 @@
                 android:textStyle="bold"
                 tools:ignore="RtlCompat" />
 
-
-
         </LinearLayout>
-
 
     </RelativeLayout>
 

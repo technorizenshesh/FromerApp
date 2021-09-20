@@ -109,7 +109,7 @@
                     android:textStyle="bold"
                     android:textColor="@color/orange"
                     android:textSize="@dimen/_18sdp"
-                    android:text="Livestock"
+                    android:text="LiveStocks"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content">
 

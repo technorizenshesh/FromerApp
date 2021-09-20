@@ -20,6 +20,7 @@ import com.my.fromerapp.act.EditProfile;
 import com.my.fromerapp.act.Login;
 import com.my.fromerapp.act.OrderHistory;
 import com.my.fromerapp.act.ShipppingAddress;
+import com.my.fromerapp.act.WishListActivity;
 import com.my.fromerapp.databinding.FragmentProfileBinding;
 import com.my.fromerapp.model.LoginModel;
 import com.my.fromerapp.utils.RetrofitClients;
@@ -68,7 +69,9 @@ public class ProfileFragment extends Fragment {
 
         binding.RRWishList.setOnClickListener(v -> {
 
-          //  startActivity(new Intent(getActivity(), InvoiceActivity.class));
+
+            startActivity(new Intent(getActivity(), WishListActivity.class));
+
         });
 
         sessionManager = new SessionManager(getActivity());

@@ -32,7 +32,8 @@
             android:indeterminateTint="@color/purple_200"
             android:indeterminateTintMode="src_atop"
             android:padding="5dp"
-            android:visibility="gone" />
+            android:visibility="gone"
+            />
 
         <RelativeLayout
             android:id="@+id/RRToolbar"

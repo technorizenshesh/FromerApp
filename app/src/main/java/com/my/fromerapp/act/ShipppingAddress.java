@@ -55,7 +55,8 @@ public class ShipppingAddress extends AppCompatActivity implements DeleteAdressL
      });
 
      binding.txtNext.setOnClickListener(v -> {
-         startActivity(new Intent(this, GtePaymentCartActivity.class));
+        // startActivity(new Intent(this, GtePaymentCartActivity.class));
+         startActivity(new Intent(this, SummeryActiivty.class));
 
      });
 

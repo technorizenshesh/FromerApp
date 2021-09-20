@@ -6,39 +6,33 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.my.fromerapp.R;
 import com.my.fromerapp.interfacesss.CarditemListener;
-import com.my.fromerapp.model.GteItemProductModelData;
+import com.my.fromerapp.model.SummeryDataModel;
 
 import java.util.ArrayList;
 
 
-public class MyGetcardItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+public class GETAllItemGetcardItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
     private Context mContext;
-    private ArrayList<GteItemProductModelData> modelList;
+    private ArrayList<SummeryDataModel> modelList;
     private OnItemClickListener mItemClickListener;
 
-    CarditemListener carditemListener;
-
-
-    public MyGetcardItemAdapter(Context context, ArrayList<GteItemProductModelData> modelList, CarditemListener carditemListener) {
+    public GETAllItemGetcardItemAdapter(Context context, ArrayList<SummeryDataModel> modelList) {
         this.mContext = context;
         this.modelList = modelList;
-        this.carditemListener = carditemListener;
     }
 
-    public void updateList(ArrayList<GteItemProductModelData> modelList) {
+    public void updateList(ArrayList<SummeryDataModel> modelList) {
         this.modelList = modelList;
         notifyDataSetChanged();
     }
 
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup viewGroup, int viewType) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_my_card_get_item, viewGroup, false);
+        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.item_my_summery, viewGroup, false);
         return new ViewHolder(view);
     }
 
@@ -46,7 +40,7 @@ public class MyGetcardItemAdapter extends RecyclerView.Adapter<RecyclerView.View
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         //Here you can fill your row view
         if (holder instanceof ViewHolder) {
-            final GteItemProductModelData model = getItem(position);
+            final SummeryDataModel model = getItem(position);
             final ViewHolder genericViewHolder = (ViewHolder) holder;
 
             genericViewHolder.txtName.setText(model.getProductDetails().getName());
@@ -55,13 +49,13 @@ public class MyGetcardItemAdapter extends RecyclerView.Adapter<RecyclerView.View
 
             genericViewHolder.txtDelete.setOnClickListener(v -> {
 
-                carditemListener.cardItem(position);
+                //carditemListener.cardItem(position);
 
             });
 
             genericViewHolder.txtWishList.setOnClickListener(v -> {
 
-                carditemListener.WishItem(position);
+               // carditemListener.WishItem(position);
 
             });
         }
@@ -77,14 +71,14 @@ public class MyGetcardItemAdapter extends RecyclerView.Adapter<RecyclerView.View
         this.mItemClickListener = mItemClickListener;
     }
 
-    private GteItemProductModelData getItem(int position) {
+    private SummeryDataModel getItem(int position) {
         return modelList.get(position);
     }
 
 
     public interface OnItemClickListener {
 
-        void onItemClick(View view, int position, GteItemProductModelData model);
+        void onItemClick(View view, int position, SummeryDataModel model);
 
     }
 

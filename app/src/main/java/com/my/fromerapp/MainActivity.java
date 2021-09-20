@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
     ActivityMainBinding binding;
 
     Fragment fragment;
+
     boolean doubleBackToExitPressedOnce = false;
 
     @Override

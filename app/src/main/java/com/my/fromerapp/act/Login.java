@@ -57,9 +57,7 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
         sessionManager = new SessionManager(Login.this);
 
         SetupUI();
-
-
-
+        
         binding.imgGoogle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

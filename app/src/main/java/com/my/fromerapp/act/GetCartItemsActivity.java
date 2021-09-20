@@ -15,6 +15,7 @@ import com.my.fromerapp.adapter.MyGetcardItemAdapter;
 import com.my.fromerapp.databinding.ActivityGetCartItemsBinding;
 import com.my.fromerapp.interfacesss.CarditemListener;
 import com.my.fromerapp.model.AddToCardModel;
+import com.my.fromerapp.model.AddWishModel;
 import com.my.fromerapp.model.GteItemProductModel;
 import com.my.fromerapp.model.GteItemProductModelData;
 import com.my.fromerapp.utils.RetrofitClients;
@@ -77,7 +78,9 @@ public class GetCartItemsActivity extends AppCompatActivity implements CarditemL
 
 
         if (sessionManager.isNetworkAvailable()) {
+
             binding.progressBar.setVisibility(VISIBLE);
+
             getProductCardItem();
 
         }else {
@@ -210,6 +213,50 @@ public class GetCartItemsActivity extends AppCompatActivity implements CarditemL
         });
     }
 
+    private void add_wish(String ProductId){
+
+        String buyer_id = Preference.get(GetCartItemsActivity.this,Preference.KEY_user_id);
+
+
+        Call<AddWishModel> call = RetrofitClients
+                .getInstance()
+                .getApi()
+                .addwish(buyer_id,ProductId);
+        call.enqueue(new Callback<AddWishModel>() {
+            @Override
+            public void onResponse(Call<AddWishModel> call, Response<AddWishModel> response) {
+
+                binding.progressBar.setVisibility(View.GONE);
+
+                AddWishModel finallyPr = response.body();
+
+                String status = finallyPr.getStatus();
+
+                if (status.equalsIgnoreCase("1")) {
+
+                    Toast.makeText(GetCartItemsActivity.this, finallyPr.getMessage(), Toast.LENGTH_SHORT).show();
+
+                    binding.progressBar.setVisibility(View.VISIBLE);
+
+                    getProductCardItem();
+
+                } else {
+
+                    binding.progressBar.setVisibility(View.GONE);
+
+                    Toast.makeText(GetCartItemsActivity.this, finallyPr.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<AddWishModel> call, Throwable t) {
+                binding.progressBar.setVisibility(View.GONE);
+                Toast.makeText(GetCartItemsActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
 
     @Override
     public void cardItem(int pos) {
@@ -230,6 +277,35 @@ public class GetCartItemsActivity extends AppCompatActivity implements CarditemL
             Toast.makeText(this, "remove this item", Toast.LENGTH_SHORT).show();
 
             delete_card(Id);
+        }
+
+    }
+
+    @Override
+    public void WishItem(int pos) {
+
+        String Id= modelList.get(pos).getProductId();
+
+        if(pos!=0)
+        {
+            if (sessionManager.isNetworkAvailable()) {
+
+                binding.progressBar.setVisibility(View.VISIBLE);
+
+                modelList.remove(pos);
+
+                add_wish(Id);
+
+            }else {
+
+                Toast.makeText(this, R.string.checkInternet, Toast.LENGTH_SHORT).show();
+            }
+
+        }else
+        {
+
+            add_wish(Id);
+
         }
 
     }

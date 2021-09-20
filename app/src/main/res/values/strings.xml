@@ -4,4 +4,6 @@
     <string name="delete"><U>Delete</U></string>
     <string name="wishlist"><U>Wishlist</U></string>
     <string name="shipping_address">Shipping Address</string>
+    <string name="add_to_card"><u>Add To Card</u></string>
+    <string name="payment_option">Payment Option</string>
 </resources>

@@ -31,6 +31,7 @@ public class ChatFragment extends Fragment {
     private Fragment fragment;
 
     ChatFragmentBinding binding;
+
     ChatAdapter mAdapter;
     private ArrayList<HomeModel> modelList = new ArrayList<>();
 

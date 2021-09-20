@@ -68,6 +68,7 @@ public class GetShippingAddressAdapter extends RecyclerView.Adapter<RecyclerView
             genericViewHolder.txtDelete.setOnClickListener(v -> {
 
                 deleteAdressListener.deleteItem(position);
+
             });
             //  genericViewHolder.txt_price.setText(model.getPrice()+"per KG");
         }

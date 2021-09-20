@@ -1,6 +1,8 @@
 package com.my.fromerapp.utils;
 
 import com.my.fromerapp.model.AddToCardModel;
+import com.my.fromerapp.model.AddWishModel;
+import com.my.fromerapp.model.AllSumeryModel;
 import com.my.fromerapp.model.ForogtPassword;
 import com.my.fromerapp.model.FrmModel;
 import com.my.fromerapp.model.GetShippingAddress;
@@ -9,6 +11,7 @@ import com.my.fromerapp.model.LoginModel;
 import com.my.fromerapp.model.ProductDetailsMoodel;
 import com.my.fromerapp.model.SelectedAddreessModel;
 import com.my.fromerapp.model.SubCategoryModel;
+import com.my.fromerapp.model.WishModel;
 
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
@@ -25,16 +28,21 @@ public interface Api {
     String forgot_password ="forgot_password";
     String get_profile ="get_profile";
     String buyer_signup ="buyer_signup";
+    String update_buyer_profile ="update_buyer_profile";
     String get_subcategory ="get_subcategory";
     String get_firm_details ="get_firm_details";
     String firm_details_byID ="firm_details_byID";
     String add_to_cart_buyer ="add_to_cart_buyer";
+    String addwish ="addwish";
+    String add_card_wishList ="add_card";
     String get_card_buyer ="get_card_buyer";
     String delete_card ="delete_card";
     String get_shipping_address ="get_shipping_address";
     String remove_ship_address ="remove_ship_address";
     String update_is_select ="update_is_select";
     String add_shipping_address ="add_shipping_address";
+    String get_wishList ="get_wishList";
+    String get_sumary ="get_sumary";
 
     @FormUrlEncoded
     @POST(buyer_login)
@@ -69,6 +77,16 @@ public interface Api {
            @Part MultipartBody.Part part
    );
 
+   @Multipart
+    @POST(update_buyer_profile)
+    Call<LoginModel>update_buyer_profile(
+            @Part("user_id") RequestBody user_id,
+            @Part("name") RequestBody name,
+            @Part("email") RequestBody email,
+            @Part("mobile") RequestBody mobile,
+            @Part MultipartBody.Part part
+   );
+
 
     @FormUrlEncoded
     @POST(get_subcategory)
@@ -93,6 +111,18 @@ public interface Api {
     @FormUrlEncoded
     @POST(get_card_buyer)
     Call<GteItemProductModel>get_card_buyer(
+            @Field("buyer_id") String buyer_id
+    );
+
+    @FormUrlEncoded
+    @POST(get_sumary)
+    Call<AllSumeryModel>get_sumary(
+            @Field("user_id") String user_id
+    );
+
+    @FormUrlEncoded
+    @POST(get_wishList)
+    Call<WishModel>get_wishList(
             @Field("buyer_id") String buyer_id
     );
 
@@ -128,6 +158,22 @@ public interface Api {
             @Field("seller_id") String seller_id,
             @Field("buyer_id") String buyer_id,
             @Field("product_id") String product_id,
+            @Field("qty") String qty
+    );
+
+    @FormUrlEncoded
+    @POST(addwish)
+    Call<AddWishModel>addwish(
+            @Field("buyer_id") String buyer_id,
+            @Field("product_id") String product_id
+    );
+
+    @FormUrlEncoded
+    @POST(add_card_wishList)
+    Call<AddToCardModel>add_card_wishList(
+            @Field("product_id") String product_id,
+            @Field("buyer_id") String buyer_id,
+            @Field("seller_id") String seller_id,
             @Field("qty") String qty
     );
 

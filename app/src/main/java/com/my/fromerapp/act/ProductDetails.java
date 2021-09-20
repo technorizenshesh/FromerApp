@@ -216,7 +216,8 @@ public class ProductDetails extends AppCompatActivity implements additemListener
              binding.progressBar.setVisibility(View.VISIBLE);
              getFrmdetailsProductseller();
 
-         }else {
+         }else
+             {
              Toast.makeText(this, R.string.checkInternet, Toast.LENGTH_SHORT).show();
          }
     }
