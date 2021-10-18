@@ -7,9 +7,13 @@ import java.util.List;
 
 public class AllSumeryModel {
 
+
     @SerializedName("result")
     @Expose
     private List<SummeryDataModel> result = null;
+    @SerializedName("total_amount")
+    @Expose
+    private Double totalAmount;
     @SerializedName("selected_address")
     @Expose
     private SelectedAddressModel selectedAddress;
@@ -29,6 +33,14 @@ public class AllSumeryModel {
 
     public void setResult(List<SummeryDataModel> result) {
         this.result = result;
+    }
+
+    public Double getTotalAmount() {
+        return totalAmount;
+    }
+
+    public void setTotalAmount(Double totalAmount) {
+        this.totalAmount = totalAmount;
     }
 
     public SelectedAddressModel getSelectedAddress() {
@@ -62,4 +74,5 @@ public class AllSumeryModel {
     public void setStatus(String status) {
         this.status = status;
     }
+
 }

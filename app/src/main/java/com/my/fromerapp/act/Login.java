@@ -4,6 +4,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.RelativeLayout;
@@ -21,8 +22,12 @@ import com.google.android.gms.auth.api.signin.GoogleSignInResult;
 import com.google.android.gms.common.ConnectionResult;
 import com.google.android.gms.common.SignInButton;
 import com.google.android.gms.common.api.GoogleApiClient;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.my.fromerapp.MainActivity;
 import com.my.fromerapp.Preference;
 import com.my.fromerapp.R;
@@ -34,6 +39,8 @@ import com.my.fromerapp.utils.SessionManager;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
+
+import static android.content.ContentValues.TAG;
 
 public class Login extends AppCompatActivity implements GoogleApiClient.OnConnectionFailedListener{
 
@@ -48,6 +55,8 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
     FirebaseAuth mAuth;
     private final static int RC_SIGN_IN = 1;
     private GoogleApiClient googleApiClient;
+
+    String token="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +74,11 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
                 Intent intent = Auth.GoogleSignInApi.getSignInIntent(googleApiClient);
                 startActivityForResult(intent, RC_SIGN_IN);
             }
+        });
+
+        FirebaseInstanceId.getInstance().getInstanceId().addOnSuccessListener(runnable -> {
+            token = runnable.getToken();
+            Log.e( "Tokennnn" ,token);
         });
 
         //Google SignIn
@@ -185,9 +199,8 @@ public class Login extends AppCompatActivity implements GoogleApiClient.OnConnec
         Call<LoginModel> call = RetrofitClients
                 .getInstance()
                 .getApi()
-                .login(emai,password,"bhhhvh");
-
-        call.enqueue(new Callback<LoginModel>() {
+                .login(emai,password,token);
+           call.enqueue(new Callback<LoginModel>() {
             @Override
             public void onResponse(Call<LoginModel> call, Response<LoginModel> response) {
 

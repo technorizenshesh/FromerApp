@@ -7,21 +7,36 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Toast;
 
+import com.my.fromerapp.Preference;
 import com.my.fromerapp.R;
 import com.my.fromerapp.adapter.OrderHistoryAdapter;
 import com.my.fromerapp.adapter.SubProductRecyclerViewAdapter;
 import com.my.fromerapp.databinding.ActivityOrderHistoryBinding;
+import com.my.fromerapp.model.AllSumeryModel;
 import com.my.fromerapp.model.HomeModel;
+import com.my.fromerapp.model.OrderHistoryModel;
+import com.my.fromerapp.model.SummeryDataModel;
+import com.my.fromerapp.utils.RetrofitClients;
+import com.my.fromerapp.utils.SessionManager;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+import static android.view.View.GONE;
+import static android.view.View.VISIBLE;
 
 public class OrderHistory extends AppCompatActivity {
 
     ActivityOrderHistoryBinding binding;
     OrderHistoryAdapter mAdapter;
-    private ArrayList<HomeModel> modelList = new ArrayList<>();
-
+    private ArrayList<OrderHistoryModel.Result> modelList = new ArrayList<>();
+    private SessionManager sessionManager;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,18 +48,26 @@ public class OrderHistory extends AppCompatActivity {
 
         });
 
-        setAdapter();
+        sessionManager = new SessionManager(OrderHistory.this);
+
+        if (sessionManager.isNetworkAvailable()) {
+
+            binding.progressBar.setVisibility(VISIBLE);
+
+            getAllSuMmeryItem();
+
+        }else {
+            Toast.makeText(this, R.string.checkInternet, Toast.LENGTH_SHORT).show();
+        }
+
+
     }
 
 
-    private void setAdapter() {
+    private void setAdapter(ArrayList<OrderHistoryModel.Result> modelList) {
 
-        this.modelList.add(new HomeModel("Corn"));
-        this.modelList.add(new HomeModel("Tomotoes"));
-        this.modelList.add(new HomeModel("Cassava"));
-        this.modelList.add(new HomeModel("Rice"));
-        this.modelList.add(new HomeModel("Soyabeans"));
-        this.modelList.add(new HomeModel("Cocoa"));
+        /*this.modelList.add(new HomeModel("Corn"));
+        this.modelList.add(new HomeModel("Tomotoes"));*/
 
         mAdapter = new OrderHistoryAdapter(OrderHistory.this,modelList);
         binding.recyclerOrderHistory.setHasFixedSize(true);
@@ -56,8 +79,59 @@ public class OrderHistory extends AppCompatActivity {
 
         mAdapter.SetOnItemClickListener(new OrderHistoryAdapter.OnItemClickListener() {
             @Override
-            public void onItemClick(View view, int position, HomeModel model) {
+            public void onItemClick(View view, int position, OrderHistoryModel.Result model) {
 
+            }
+        });
+
+    }
+
+
+    public void getAllSuMmeryItem() {
+
+        String buyer_id = Preference.get(OrderHistory.this,Preference.KEY_user_id);
+
+        Call<OrderHistoryModel> call = RetrofitClients
+                .getInstance()
+                .getApi()
+                .get_order_history(buyer_id);
+        call.enqueue(new Callback<OrderHistoryModel>() {
+            @Override
+            public void onResponse(Call<OrderHistoryModel> call, Response<OrderHistoryModel> response) {
+                try {
+
+                    binding.progressBar.setVisibility(GONE);
+                    binding.txtEmty.setVisibility(GONE);
+
+                    OrderHistoryModel myclass = response.body();
+
+                    String status = myclass.status;
+                    String result = myclass.message;
+
+                    if (status.equalsIgnoreCase("1")) {
+
+                        modelList = (ArrayList<OrderHistoryModel.Result>) myclass.result;
+                        setAdapter(modelList);
+
+
+
+                    } else {
+                        binding.txtEmty.setVisibility(View.VISIBLE);
+                        //binding.txtEMPTY.setVisibility(View.VISIBLE);
+                        Toast.makeText(OrderHistory.this, result, Toast.LENGTH_SHORT).show();
+                    }
+
+                } catch(Exception e) {
+                    binding.txtEmty.setVisibility(View.VISIBLE);
+
+                    e.printStackTrace();
+                }
+            }
+            @Override
+            public void onFailure(Call<OrderHistoryModel> call, Throwable t) {
+                binding.progressBar.setVisibility(GONE);
+                binding.txtEmty.setVisibility(View.VISIBLE);
+                Toast.makeText(OrderHistory.this, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }

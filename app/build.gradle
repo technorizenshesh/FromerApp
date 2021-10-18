@@ -84,6 +84,9 @@ dependencies {
     implementation 'vn.nms.dseekbar:DMSeekBar:1.0.0'
     implementation 'com.braintreepayments:card-form:5.0.0'
 
+    //Firebase Token
+    implementation 'com.google.firebase:firebase-messaging:21.0.1'
+    implementation 'com.google.firebase:firebase-messaging:9.6.1'
 
 }
 apply plugin: 'com.google.gms.google-services'

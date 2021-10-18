@@ -8,6 +8,8 @@ import com.my.fromerapp.model.FrmModel;
 import com.my.fromerapp.model.GetShippingAddress;
 import com.my.fromerapp.model.GteItemProductModel;
 import com.my.fromerapp.model.LoginModel;
+import com.my.fromerapp.model.OrderHistoryModel;
+import com.my.fromerapp.model.PlaceOrder;
 import com.my.fromerapp.model.ProductDetailsMoodel;
 import com.my.fromerapp.model.SelectedAddreessModel;
 import com.my.fromerapp.model.SubCategoryModel;
@@ -43,6 +45,8 @@ public interface Api {
     String add_shipping_address ="add_shipping_address";
     String get_wishList ="get_wishList";
     String get_sumary ="get_sumary";
+    String add_placeorder ="add_placeorder";
+    String get_order_history ="get_order_history";
 
     @FormUrlEncoded
     @POST(buyer_login)
@@ -121,6 +125,12 @@ public interface Api {
     );
 
     @FormUrlEncoded
+    @POST(get_order_history)
+    Call<OrderHistoryModel>get_order_history(
+            @Field("user_id") String user_id
+    );
+
+    @FormUrlEncoded
     @POST(get_wishList)
     Call<WishModel>get_wishList(
             @Field("buyer_id") String buyer_id
@@ -187,6 +197,18 @@ public interface Api {
     @POST(remove_ship_address)
     Call<AddToCardModel>remove_ship_address(
             @Field("id") String id
+    );
+
+    @FormUrlEncoded
+    @POST(add_placeorder)
+    Call<PlaceOrder>add_placeorder(
+            @Field("user_id") String user_id,
+            @Field("seller_id") String seller_id,
+            @Field("address_id") String address_id,
+            @Field("amount") String amount,
+            @Field("item_id") String item_id,
+            @Field("cart_id") String cart_id,
+            @Field("payment_type") String payment_type
     );
 
 }

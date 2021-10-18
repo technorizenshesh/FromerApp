@@ -23,6 +23,9 @@ public class SummeryDataModel {
     @SerializedName("date_time")
     @Expose
     private String dateTime;
+    @SerializedName("status")
+    @Expose
+    private String status;
     @SerializedName("product_details")
     @Expose
     private ProductDetailsModel productDetails;
@@ -79,6 +82,14 @@ public class SummeryDataModel {
 
     public void setDateTime(String dateTime) {
         this.dateTime = dateTime;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
     }
 
     public ProductDetailsModel getProductDetails() {

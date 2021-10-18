@@ -6,6 +6,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -23,6 +25,7 @@ import com.my.fromerapp.utils.RetrofitClients;
 import com.my.fromerapp.utils.SessionManager;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -38,17 +41,39 @@ public class SummeryActiivty extends AppCompatActivity {
     private ArrayList<SummeryDataModel> modelList = new ArrayList<>();
     private SessionManager sessionManager;
 
+    String Seller_id="";
+    String Address_id="";
+    double Total=0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding= DataBindingUtil.setContentView(this,R.layout.activity_summery_actiivty);
 
         binding.AddSummery.setOnClickListener(v -> {
-          //  binding.progressBar.setVisibility(View.VISIBLE);
-          Intent intent = new Intent(SummeryActiivty.this, MainActivity.class);
-            startActivity(intent);
-            finish();
 
+            List<String> list = new ArrayList<>();
+            List<String> list_card = new ArrayList<>();
+
+            for (int i = 0; i < modelList.size(); i++)
+            {
+                String Product_id = modelList.get(i).getProductId();
+                String card_id = modelList.get(i).getId();
+                list.add(Product_id);
+                list_card.add(card_id);
+            }
+
+            String Product_id = TextUtils.join(",",list);
+            String card_id_final = TextUtils.join(",",list_card);
+
+            Log.d("Product_id-- >", Product_id);
+
+           Intent intent = new Intent(SummeryActiivty.this, PaymentOption.class);
+           intent.putExtra("item_id",Product_id);
+           intent.putExtra("card_id",card_id_final);
+           intent.putExtra("Address_id",Address_id);
+           intent.putExtra("Seller_id",Seller_id);
+           intent.putExtra("Amount",Total+"");
+            startActivity(intent);
         });
 
         sessionManager = new SessionManager(SummeryActiivty.this);
@@ -118,13 +143,21 @@ public class SummeryActiivty extends AppCompatActivity {
                         if(Address1!=null || Address2!=null || city!=null || state!=null || Country!=null)
                         {
                             binding.txtAddress.setText(Address1 +","+Address2+","+city+","+state+","+Country);
-                        }
 
+                            Address_id=myclass.getSelectedAddress().getId();
+
+                        }
                         if(myclass.getResult()!=null)
                         {
                             modelList= (ArrayList<SummeryDataModel>) myclass.getResult();
+
+                            Seller_id=modelList.get(0).getSellerId().toString();
+
+                            binding.AddSummery.setText("Pay  "+myclass.getTotalAmount()+"");
                             setAdapter(modelList);
                         }
+
+                        Total =myclass.getTotalAmount();
 
                     } else {
                         //binding.txtEMPTY.setVisibility(View.VISIBLE);

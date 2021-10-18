@@ -150,4 +150,22 @@ public class MainActivity extends AppCompatActivity {
         transaction.commit();
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        binding.imgHome.setImageResource(R.mipmap.home);
+        binding.imgChat.setImageResource(R.mipmap.chat);
+        binding.imgProfile.setImageResource(R.mipmap.profile);
+        binding.imgOrder.setImageResource(R.mipmap.my_orders);
+
+        binding.txtHome.setTextColor(getResources().getColor(R.color.purple_200));
+        binding.txtchat.setTextColor(getResources().getColor(R.color.natural_gray));
+        binding.txtprofile.setTextColor(getResources().getColor(R.color.natural_gray));
+        binding.txtorder.setTextColor(getResources().getColor(R.color.natural_gray));
+
+        fragment = new HomeFragment();
+        loadFragment(fragment);
+
+    }
 }

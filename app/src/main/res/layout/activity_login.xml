@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools">
+    xmlns:tools="http://schemas.android.com/tools"
+    >
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -69,7 +70,7 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/input_layout_Email"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    style="@style/AppTheme"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_15sdp"
@@ -88,7 +89,7 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/input_layout_Pass"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    style="@style/AppTheme"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_10sdp"

@@ -224,6 +224,7 @@
             </LinearLayout>
 
             <RadioButton
+                android:visibility="gone"
                 android:padding="10sp"
                 android:buttonTint="@color/purple_200"
                 android:textSize="@dimen/_18sdp"

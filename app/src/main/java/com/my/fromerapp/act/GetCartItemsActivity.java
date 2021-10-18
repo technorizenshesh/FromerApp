@@ -166,9 +166,8 @@ public class GetCartItemsActivity extends AppCompatActivity implements CarditemL
                 binding.LLCard.setVerticalGravity(GONE);
                 binding.txtCheckOut.setVisibility(GONE);
                 binding.txtEmty.setVisibility(VISIBLE);
-              //  binding.txtEMPTY.setVisibility(View.VISIBLE);
-                Toast.makeText(GetCartItemsActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
-            }
+
+              }
         });
     }
 
@@ -272,6 +271,7 @@ public class GetCartItemsActivity extends AppCompatActivity implements CarditemL
         {
             binding.LLCard.setVisibility(GONE);
             binding.llItem.setVisibility(GONE);
+            binding.txtCheckOut.setVisibility(GONE);
             binding.txtEmty.setVisibility(VISIBLE);
 
             Toast.makeText(this, "remove this item", Toast.LENGTH_SHORT).show();

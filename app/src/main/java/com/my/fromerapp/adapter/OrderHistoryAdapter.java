@@ -11,6 +11,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.my.fromerapp.R;
 import com.my.fromerapp.model.HomeModel;
+import com.my.fromerapp.model.OrderHistoryModel;
+import com.my.fromerapp.model.SummeryDataModel;
 
 import java.util.ArrayList;
 
@@ -18,16 +20,16 @@ import java.util.ArrayList;
 public class OrderHistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
 
     private Context mContext;
-    private ArrayList<HomeModel> modelList;
+    private ArrayList<OrderHistoryModel.Result> modelList;
     private OnItemClickListener mItemClickListener;
 
 
-    public OrderHistoryAdapter(Context context, ArrayList<HomeModel> modelList) {
+    public OrderHistoryAdapter(Context context, ArrayList<OrderHistoryModel.Result> modelList) {
         this.mContext = context;
         this.modelList = modelList;
     }
 
-    public void updateList(ArrayList<HomeModel> modelList) {
+    public void updateList(ArrayList<OrderHistoryModel.Result> modelList) {
         this.modelList = modelList;
         notifyDataSetChanged();
     }
@@ -42,9 +44,12 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     public void onBindViewHolder(RecyclerView.ViewHolder holder, final int position) {
         //Here you can fill your row view
         if (holder instanceof ViewHolder) {
-            final HomeModel model = getItem(position);
+            final OrderHistoryModel.Result model = getItem(position);
             final ViewHolder genericViewHolder = (ViewHolder) holder;
-           // genericViewHolder.txtName.setText(model.getName());
+
+           genericViewHolder.txtOrder_id.setText("Order id -: "+model.orderId+"");
+           genericViewHolder.txtAmt.setText("Total Amount -: "+model.amount+"");
+
         }
 
     }
@@ -60,26 +65,28 @@ public class OrderHistoryAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         this.mItemClickListener = mItemClickListener;
     }
 
-    private HomeModel getItem(int position) {
+    private OrderHistoryModel.Result getItem(int position) {
         return modelList.get(position);
     }
 
 
     public interface OnItemClickListener {
 
-        void onItemClick(View view, int position, HomeModel model);
+        void onItemClick(View view, int position, OrderHistoryModel.Result model);
 
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        private TextView txtName;
+        private TextView txtOrder_id;
+        private TextView txtAmt;
 
 
         public ViewHolder(final View itemView) {
             super(itemView);
 
-         //this.txtName=itemView.findViewById(R.id.txtName);
+         this.txtOrder_id=itemView.findViewById(R.id.txtOrder_id);
+         this.txtAmt=itemView.findViewById(R.id.txtAmt);
 
 
             itemView.setOnClickListener(new View.OnClickListener() {
