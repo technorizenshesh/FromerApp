@@ -37,6 +37,7 @@ public interface Api {
     String add_to_cart_buyer ="add_to_cart_buyer";
     String addwish ="addwish";
     String add_card_wishList ="add_card";
+
     String get_card_buyer ="get_card_buyer";
     String delete_card ="delete_card";
     String get_shipping_address ="get_shipping_address";

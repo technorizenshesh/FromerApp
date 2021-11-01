@@ -18,6 +18,8 @@ public static String KEY_sub_Id = "KEY_sub_Id";
 public static String KEYLivestock = "Livestock";
 public static String KEYsuubcattitle = "sub";
 public static String KEY_seller_id = "seller_id";
+    public static String key_switch_shift_change = "shift_change";
+
 
 
 private Activity activity;

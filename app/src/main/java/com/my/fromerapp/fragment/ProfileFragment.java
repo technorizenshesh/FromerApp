@@ -3,6 +3,7 @@ package com.my.fromerapp.fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,6 +47,7 @@ public class ProfileFragment extends Fragment {
             startActivity(new Intent(getActivity(), EditProfile.class));
 
         });
+
         binding.RRLogout.setOnClickListener(v -> {
             sessionManager.logoutUser();
             Preference.clearPreference(getActivity());
@@ -95,6 +97,9 @@ public class ProfileFragment extends Fragment {
     private void getProfileMethod(){
 
        String UsserId= Preference.get(getActivity(),Preference.KEY_user_id);
+
+        Log.e("User_id -----",""+UsserId);
+
 
         Call<LoginModel> call = RetrofitClients
                 .getInstance()
