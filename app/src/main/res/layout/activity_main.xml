@@ -101,7 +101,7 @@
                             android:textColor="@color/natural_gray"
                             android:textSize="@dimen/_12sdp"
                             android:layout_marginTop="@dimen/_2sdp"
-                            android:text="My Orders">
+                            android:text="Card">
 
                         </TextView>
 

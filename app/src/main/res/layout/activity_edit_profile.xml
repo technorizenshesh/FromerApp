@@ -112,9 +112,9 @@
                 </RelativeLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    style="@style/AppTheme"
                     android:layout_marginTop="@dimen/_15sdp"
                     android:textColorHint="@color/natural_gray">
 
@@ -130,8 +130,8 @@
 
 
                 <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
+                    style="@style/AppTheme"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/_15sdp"
                     android:textColorHint="@color/natural_gray">
@@ -148,9 +148,9 @@
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/input_layout_Email"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    style="@style/AppTheme"
                     android:layout_marginTop="@dimen/_15sdp"
                     android:textColorHint="@color/natural_gray">
 

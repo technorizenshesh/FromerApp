@@ -9,29 +9,31 @@ import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
 import android.util.Log;
-
-import androidx.annotation.MainThread;
 import androidx.core.app.NotificationCompat;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
+import com.my.fromerapp.Chat.MsgChatAct;
 import com.my.fromerapp.MainActivity;
 import com.my.fromerapp.Preference;
 import com.my.fromerapp.R;
 
-
 import org.json.JSONObject;
-
 import java.util.Map;
 import java.util.Random;
 
 public class MyFirebaseMessagingService extends FirebaseMessagingService {
 
-    private static final String TAG =MyFirebaseMessagingService.class.getSimpleName();
+    private static final String TAG = MyFirebaseMessagingService.class.getSimpleName();
 
     String status ="";
     String Msg ="";
     String Title ="";
+    String userimage ="";
     String key ="";
+
+    String userid ="";
+    String type ="";
+    Intent intent;
 
     @Override
     public void onMessageReceived(RemoteMessage remoteMessage) {
@@ -47,8 +49,6 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             Log.d(TAG, "Message data payload" + remoteMessage.getData());
             Map<String, String> data = remoteMessage.getData();
             String jobType = data.get("type");
-
-
             /* Check the message contains data If needs to be processed by long running job
                so check if data needs to be processed by long running job */
 
@@ -96,10 +96,14 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
             try
             {
                 JSONObject object = new JSONObject(data.get("message"));
+                 key = object.optString("key");
                  status = object.optString("result");
                  Msg = object.optString("message");
-                 Title = object.optString("title");
-                 key = object.optString("key");
+                 Title = object.optString("username");
+                userimage = object.optString("userimage");
+
+                userid = object.optString("userid");
+                type = object.optString("type");
                 //  Intent intent;
 
             }catch (Exception e)
@@ -223,19 +227,40 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
    /*    if(importantShift)
        {*/
 
-        Intent intent = new Intent(this, MainActivity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        if(type.equalsIgnoreCase("chat"))
+        {
+           intent = new Intent(this, MsgChatAct.class);
+            intent.putExtra("SellerId",userid);
+            intent.putExtra("SellerName",Title);
+            intent.putExtra("SellerImage",userimage);
+            intent.putExtra("request_id","1");
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+        /*    intent = new Intent(this, MainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);*/
+
+        }else
+        {
+             intent = new Intent(this, MainActivity.class);
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+        }
+
+      /*  Intent intent = new Intent(this, MainActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);*/
 
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 , intent,
                    PendingIntent.FLAG_ONE_SHOT);
 
            String channelId = "1";
            Uri defaultSoundUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
+
            NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(this, channelId)
                    .setStyle(new NotificationCompat.BigTextStyle().bigText(Msg))
                    .setSmallIcon(R.mipmap.logo)
                    //.setLargeIcon(bitmap)
-                   .setContentTitle(Title)
+                  // .setContentTitle("User :"+Title)
+                  // .setContentTitle(""+Title)
+                   .setContentTitle(userid+","+Title)
                    .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                    .setContentText(Msg)
                    .setAutoCancel(true)

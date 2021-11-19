@@ -111,7 +111,7 @@ public class AddShippingAddress extends AppCompatActivity {
 
                 if (status.equalsIgnoreCase("1")) {
 
-                    startActivity(new Intent(AddShippingAddress.this, ShipppingAddress.class));
+                    startActivity(new Intent(AddShippingAddress.this, ShipppingAddress.class).putExtra("Type","other"));
 
                 } else {
                     binding.progressBar.setVisibility(View.GONE);
@@ -121,7 +121,7 @@ public class AddShippingAddress extends AppCompatActivity {
             @Override
             public void onFailure(Call<AddToCardModel> call, Throwable t) {
                 binding.progressBar.setVisibility(View.GONE);
-                startActivity(new Intent(AddShippingAddress.this, ShipppingAddress.class));
+                startActivity(new Intent(AddShippingAddress.this, ShipppingAddress.class).putExtra("Type","other"));
             }
         });
     }

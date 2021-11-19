@@ -1,10 +1,40 @@
 {
   "project_info": {
     "project_number": "952831181539",
+    "firebase_url": "https://formerapp-99402-default-rtdb.firebaseio.com",
     "project_id": "formerapp-99402",
     "storage_bucket": "formerapp-99402.appspot.com"
   },
   "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:952831181539:android:1632e7c7418503a087bbd6",
+        "android_client_info": {
+          "package_name": "com.my.formerseller"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "952831181539-4jhv2vl7pj1knm3fr9nbinj04dfkoi3o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDfkY0SaSsmyKaRArt4gwKTMHoewM7cQXQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "952831181539-4jhv2vl7pj1knm3fr9nbinj04dfkoi3o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
     {
       "client_info": {
         "mobilesdk_app_id": "1:952831181539:android:3a43e00adb41031d87bbd6",

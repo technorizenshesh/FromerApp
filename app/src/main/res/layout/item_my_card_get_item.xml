@@ -55,6 +55,7 @@
                    />
 
                 <TextView
+                    android:visibility="gone"
                     android:id="@+id/txtQuntity"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -65,7 +66,6 @@
 
                 <LinearLayout
                     android:id="@+id/ll_additem"
-                    android:visibility="gone"
                     android:layout_width="@dimen/_90sdp"
                     android:layout_height="@dimen/_25sdp"
                     android:layout_marginTop="@dimen/_5sdp"
@@ -73,7 +73,7 @@
                     android:orientation="horizontal">
 
                     <RelativeLayout
-                        android:id="@+id/RR_mnus"
+                        android:id="@+id/RR_mnus1"
                         android:layout_width="@dimen/_30sdp"
                         android:layout_height="match_parent">
 
@@ -95,11 +95,11 @@
                     </View>
 
                     <RelativeLayout
-                        android:id="@+id/RR_plus"
                         android:layout_width="@dimen/_30sdp"
                         android:layout_height="match_parent">
 
                         <TextView
+                            android:id="@+id/txt_quantity"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_centerInParent="true"
@@ -122,6 +122,7 @@
 
 
                     <RelativeLayout
+                        android:id="@+id/RRplus"
                         android:layout_width="@dimen/_25sdp"
                         android:layout_height="match_parent">
 

@@ -29,8 +29,8 @@
             android:layout_height="wrap_content"
             android:text="No Item add"
             android:textColor="@color/black"
-            android:textSize="@dimen/_16sdp"
-            android:textStyle="bold">
+            android:textSize="@dimen/_14sdp"
+            >
 
         </TextView>
 

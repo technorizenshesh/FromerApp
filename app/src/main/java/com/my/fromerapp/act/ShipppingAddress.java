@@ -40,11 +40,29 @@ public class ShipppingAddress extends AppCompatActivity implements DeleteAdressL
     GetShippingAddressAdapter mAdapter;
     private ArrayList<GetShippingAddressData> modelList = new ArrayList<>();
     private SessionManager sessionManager;
+    String Type="";
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         binding= DataBindingUtil.setContentView(this,R.layout.activity_shippping_address);
+
+        Intent intent=getIntent();
+
+        if(intent!=null)
+        {
+            Type=intent.getStringExtra("Type").toString();
+        }
+
+        if(Type.equalsIgnoreCase("card"))
+        {
+           binding.txtNext.setVisibility(VISIBLE);
+
+        }else
+        {
+            binding.txtNext.setVisibility(GONE);
+        }
+
 
      binding.RRBack.setOnClickListener(v -> {
          onBackPressed();
@@ -121,7 +139,6 @@ public class ShipppingAddress extends AppCompatActivity implements DeleteAdressL
 
                     if (status.equalsIgnoreCase("1")) {
                         binding.txtEmty.setVisibility(GONE);
-                        binding.txtNext.setVisibility(VISIBLE);
                         binding.LLCard.setVisibility(VISIBLE);
                         modelList= (ArrayList<GetShippingAddressData>) myclass.getResult();
 

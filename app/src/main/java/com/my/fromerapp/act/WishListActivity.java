@@ -85,7 +85,7 @@ public class WishListActivity extends AppCompatActivity implements WishlistListe
     }
 
     public void getWishList() {
-
+        modelList.clear();
         String buyer_id = Preference.get(WishListActivity.this,Preference.KEY_user_id);
 
         Call<WishModel> call = RetrofitClients
@@ -98,8 +98,6 @@ public class WishListActivity extends AppCompatActivity implements WishlistListe
                 try {
 
                     binding.progressBar.setVisibility(GONE);
-
-
                     WishModel myclass = response.body();
 
                     String status = myclass.getStatus();
@@ -114,20 +112,21 @@ public class WishListActivity extends AppCompatActivity implements WishlistListe
                         setAdapter(modelList);
 
                     } else {
+                        binding.recyclerWishlist.setVisibility(GONE);
                         binding.txtEmty.setVisibility(VISIBLE);
                     }
 
                 } catch(Exception e) {
                     e.printStackTrace();
+                    binding.recyclerWishlist.setVisibility(GONE);
                     binding.txtEmty.setVisibility(VISIBLE);
                 }
             }
             @Override
             public void onFailure(Call<WishModel> call, Throwable t) {
-
+                binding.recyclerWishlist.setVisibility(GONE);
                 binding.progressBar.setVisibility(GONE);
                 binding.txtEmty.setVisibility(VISIBLE);
-                Toast.makeText(WishListActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }

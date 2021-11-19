@@ -58,7 +58,7 @@ public class ProfileFragment extends Fragment {
 
         binding.RRShippingAddress.setOnClickListener(v -> {
 
-            startActivity(new Intent(getActivity(), ShipppingAddress.class));
+            startActivity(new Intent(getActivity(), ShipppingAddress.class).putExtra("Type","other"));
         });
 
         binding.RRorderHistory.setOnClickListener(v -> {

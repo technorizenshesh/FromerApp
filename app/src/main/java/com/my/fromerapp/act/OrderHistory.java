@@ -33,10 +33,11 @@ import static android.view.View.VISIBLE;
 
 public class OrderHistory extends AppCompatActivity {
 
-    ActivityOrderHistoryBinding binding;
     OrderHistoryAdapter mAdapter;
     private ArrayList<OrderHistoryModel.Result> modelList = new ArrayList<>();
     private SessionManager sessionManager;
+    ActivityOrderHistoryBinding binding;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,22 +55,17 @@ public class OrderHistory extends AppCompatActivity {
 
             binding.progressBar.setVisibility(VISIBLE);
 
-            getAllSuMmeryItem();
+            getOrderhistory();
 
         }else {
             Toast.makeText(this, R.string.checkInternet, Toast.LENGTH_SHORT).show();
         }
-
-
     }
 
 
     private void setAdapter(ArrayList<OrderHistoryModel.Result> modelList) {
 
-        /*this.modelList.add(new HomeModel("Corn"));
-        this.modelList.add(new HomeModel("Tomotoes"));*/
-
-        mAdapter = new OrderHistoryAdapter(OrderHistory.this,modelList);
+        mAdapter = new OrderHistoryAdapter(OrderHistory.this,modelList,"order");
         binding.recyclerOrderHistory.setHasFixedSize(true);
         // use a linear layout manager
         //  binding.recyclerSearch.setLayoutManager(new GridLayoutManager(this, 2));
@@ -87,7 +83,7 @@ public class OrderHistory extends AppCompatActivity {
     }
 
 
-    public void getAllSuMmeryItem() {
+    public void getOrderhistory() {
 
         String buyer_id = Preference.get(OrderHistory.this,Preference.KEY_user_id);
 
@@ -105,15 +101,13 @@ public class OrderHistory extends AppCompatActivity {
 
                     OrderHistoryModel myclass = response.body();
 
-                    String status = myclass.status;
-                    String result = myclass.message;
+                    String status = myclass.getStatus();
+                    String result = myclass.getMessage();
 
                     if (status.equalsIgnoreCase("1")) {
 
-                        modelList = (ArrayList<OrderHistoryModel.Result>) myclass.result;
+                        modelList = (ArrayList<OrderHistoryModel.Result>) myclass.getResult();
                         setAdapter(modelList);
-
-
 
                     } else {
                         binding.txtEmty.setVisibility(View.VISIBLE);
@@ -123,7 +117,6 @@ public class OrderHistory extends AppCompatActivity {
 
                 } catch(Exception e) {
                     binding.txtEmty.setVisibility(View.VISIBLE);
-
                     e.printStackTrace();
                 }
             }

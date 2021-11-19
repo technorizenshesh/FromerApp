@@ -3,6 +3,7 @@ package com.my.fromerapp;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.databinding.DataBindingUtil;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.content.Intent;
@@ -27,6 +28,9 @@ public class MainActivity extends AppCompatActivity {
     Fragment fragment;
 
     boolean doubleBackToExitPressedOnce = false;
+    private long backPressedTime;
+    private Toast backToast;
+    FragmentManager fragmentManager = getSupportFragmentManager();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -110,14 +114,54 @@ public class MainActivity extends AppCompatActivity {
         loadFragment(fragment);
     }
 
+
+    public boolean loadFragment(Fragment fragment) {
+        if (fragment != null) {
+            fragmentManager.beginTransaction()
+                    .addToBackStack("Home")
+                    .replace(R.id.fragment_homeContainer, fragment)//, tag)
+                    .commit();
+            return true;
+        }
+        return false;
+    }
+
+
+/*    public void loadFragment(Fragment fragment) {
+        // load fragment
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        transaction.replace(R.id.fragment_homeContainer, fragment);
+        transaction.addToBackStack("home");
+        transaction.commit();
+    }*/
+
     @Override
+    protected void onResume() {
+        super.onResume();
+
+        binding.imgHome.setImageResource(R.mipmap.home);
+        binding.imgChat.setImageResource(R.mipmap.chat);
+        binding.imgProfile.setImageResource(R.mipmap.profile);
+        binding.imgOrder.setImageResource(R.mipmap.my_orders);
+
+        binding.txtHome.setTextColor(getResources().getColor(R.color.purple_200));
+        binding.txtchat.setTextColor(getResources().getColor(R.color.natural_gray));
+        binding.txtprofile.setTextColor(getResources().getColor(R.color.natural_gray));
+        binding.txtorder.setTextColor(getResources().getColor(R.color.natural_gray));
+
+        fragment = new HomeFragment();
+        loadFragment(fragment);
+
+    }
+
+
+ @Override
     public void onBackPressed() {
         if (doubleBackToExitPressedOnce) {
             super.onBackPressed();
             finishAffinity();
             return;
         }
-
         this.doubleBackToExitPressedOnce = true;
         Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show();
 
@@ -142,30 +186,21 @@ public class MainActivity extends AppCompatActivity {
         }, 2000);
     }
 
-    public void loadFragment(Fragment fragment) {
-        // load fragment
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.fragment_homeContainer, fragment);
-        transaction.addToBackStack("home");
-        transaction.commit();
-    }
+   /* @Override
+    public void onBackPressed() {
+        if (fragmentManager.getBackStackEntryCount() > 1) {
+            fragmentManager.popBackStack();
+        } else if (fragmentManager.getBackStackEntryCount() == 1) {
+            if (backPressedTime + 2000 > System.currentTimeMillis()) {
+                finish();
+                return;
+            } else {
+                backToast = Toast.makeText(MainActivity.this, "Press once again to exit", Toast.LENGTH_SHORT);
+                backToast.show();
+            }
+            backPressedTime = System.currentTimeMillis();
+        }
+    }*/
 
-    @Override
-    protected void onResume() {
-        super.onResume();
 
-        binding.imgHome.setImageResource(R.mipmap.home);
-        binding.imgChat.setImageResource(R.mipmap.chat);
-        binding.imgProfile.setImageResource(R.mipmap.profile);
-        binding.imgOrder.setImageResource(R.mipmap.my_orders);
-
-        binding.txtHome.setTextColor(getResources().getColor(R.color.purple_200));
-        binding.txtchat.setTextColor(getResources().getColor(R.color.natural_gray));
-        binding.txtprofile.setTextColor(getResources().getColor(R.color.natural_gray));
-        binding.txtorder.setTextColor(getResources().getColor(R.color.natural_gray));
-
-        fragment = new HomeFragment();
-        loadFragment(fragment);
-
-    }
 }

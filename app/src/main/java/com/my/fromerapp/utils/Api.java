@@ -3,10 +3,12 @@ package com.my.fromerapp.utils;
 import com.my.fromerapp.model.AddToCardModel;
 import com.my.fromerapp.model.AddWishModel;
 import com.my.fromerapp.model.AllSumeryModel;
+import com.my.fromerapp.model.ConverSationList;
 import com.my.fromerapp.model.ForogtPassword;
 import com.my.fromerapp.model.FrmModel;
 import com.my.fromerapp.model.GetShippingAddress;
 import com.my.fromerapp.model.GteItemProductModel;
+import com.my.fromerapp.model.InsertChat;
 import com.my.fromerapp.model.LoginModel;
 import com.my.fromerapp.model.OrderHistoryModel;
 import com.my.fromerapp.model.PlaceOrder;
@@ -27,6 +29,7 @@ import retrofit2.http.Part;
 public interface Api {
 
     String buyer_login ="buyer_login";
+    String social_login ="social_login";
     String forgot_password ="forgot_password";
     String get_profile ="get_profile";
     String buyer_signup ="buyer_signup";
@@ -48,6 +51,10 @@ public interface Api {
     String get_sumary ="get_sumary";
     String add_placeorder ="add_placeorder";
     String get_order_history ="get_order_history";
+    String get_conversation ="get_conversation";
+
+    //Api Call
+    String insert_chat ="insert_chat";
 
     @FormUrlEncoded
     @POST(buyer_login)
@@ -55,6 +62,30 @@ public interface Api {
             @Field("email") String email,
             @Field("password") String password,
             @Field("register_id") String register_id
+    );
+
+
+    @FormUrlEncoded
+    @POST(social_login)
+    Call<LoginModel>social_login(
+            @Field("social_id") String social_id,
+            @Field("name") String name,
+            @Field("email") String email,
+            @Field("mobile") String mobile,
+            @Field("register_id") String register_id,
+            @Field("firm_name") String firm_name,
+            @Field("firm_address") String firm_address,
+            @Field("lat") String lat,
+            @Field("lon") String lon,
+            @Field("type") String type
+    );
+
+    @FormUrlEncoded
+    @POST(insert_chat)
+    Call<InsertChat>insert_chat(
+            @Field("sender_id") String sender_id,
+            @Field("receiver_id") String receiver_id,
+            @Field("chat_message") String chat_message
     );
 
  @FormUrlEncoded
@@ -129,6 +160,12 @@ public interface Api {
     @POST(get_order_history)
     Call<OrderHistoryModel>get_order_history(
             @Field("user_id") String user_id
+    );
+
+    @FormUrlEncoded
+    @POST(get_conversation)
+    Call<ConverSationList>get_conversation(
+            @Field("receiver_id") String receiver_id
     );
 
     @FormUrlEncoded

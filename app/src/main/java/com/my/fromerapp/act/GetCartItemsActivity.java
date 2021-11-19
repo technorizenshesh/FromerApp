@@ -30,7 +30,7 @@ import retrofit2.Response;
 import static android.view.View.GONE;
 import static android.view.View.VISIBLE;
 
-public class GetCartItemsActivity extends AppCompatActivity implements CarditemListener {
+public class GetCartItemsActivity extends AppCompatActivity implements CarditemListener{
 
     ActivityGetCartItemsBinding binding;
     MyGetcardItemAdapter mAdapter;
@@ -47,7 +47,7 @@ public class GetCartItemsActivity extends AppCompatActivity implements CarditemL
 
             if(modelList.isEmpty() || modelList !=null)
             {
-                startActivity(new Intent(GetCartItemsActivity.this, ShipppingAddress.class));
+                startActivity(new Intent(GetCartItemsActivity.this, ShipppingAddress.class).putExtra("Type","card"));
 
             }else
             {
@@ -147,6 +147,7 @@ public class GetCartItemsActivity extends AppCompatActivity implements CarditemL
                         binding.LLCard.setVisibility(GONE);
                         binding.llItem.setVisibility(GONE);
                         binding.txtEmty.setVisibility(VISIBLE);
+                        binding.txtCheckOut.setVisibility(GONE);
                         Toast.makeText(GetCartItemsActivity.this, result, Toast.LENGTH_SHORT).show();
                     }
 
@@ -216,7 +217,6 @@ public class GetCartItemsActivity extends AppCompatActivity implements CarditemL
 
         String buyer_id = Preference.get(GetCartItemsActivity.this,Preference.KEY_user_id);
 
-
         Call<AddWishModel> call = RetrofitClients
                 .getInstance()
                 .getApi()
@@ -265,7 +265,7 @@ public class GetCartItemsActivity extends AppCompatActivity implements CarditemL
         if(pos !=0){
 
             modelList.remove(pos);
-            delete_card( modelList.get(pos).getId());
+            delete_card(Id);
 
         }else
         {
@@ -308,6 +308,64 @@ public class GetCartItemsActivity extends AppCompatActivity implements CarditemL
 
         }
 
+    }
+
+    private void add_to_cart_buyer(String ProductId,String quntity){
+
+        String Seller_id = Preference.get(GetCartItemsActivity.this,Preference.KEY_seller_id);
+        String buyer_id = Preference.get(GetCartItemsActivity.this,Preference.KEY_user_id);
+
+
+        Call<AddToCardModel> call = RetrofitClients
+                .getInstance()
+                .getApi()
+                .add_to_cart_buyer(Seller_id,buyer_id,ProductId,quntity);
+
+        call.enqueue(new Callback<AddToCardModel>() {
+            @Override
+            public void onResponse(Call<AddToCardModel> call, Response<AddToCardModel> response) {
+
+                binding.progressBar.setVisibility(View.GONE);
+
+                AddToCardModel finallyPr = response.body();
+
+                String status = finallyPr.getStatus();
+
+                if (status.equalsIgnoreCase("1")) {
+
+                    Toast.makeText(GetCartItemsActivity.this, finallyPr.getResult(), Toast.LENGTH_SHORT).show();
+
+                    binding.progressBar.setVisibility(View.VISIBLE);
+
+                    getProductCardItem();
+
+                } else {
+
+                    binding.progressBar.setVisibility(View.GONE);
+
+                    Toast.makeText(GetCartItemsActivity.this, finallyPr.getMessage(), Toast.LENGTH_SHORT).show();
+                }
+
+            }
+
+            @Override
+            public void onFailure(Call<AddToCardModel> call, Throwable t) {
+                binding.progressBar.setVisibility(View.GONE);
+                Toast.makeText(GetCartItemsActivity.this, t.getMessage(), Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    @Override
+    public void addItem(int pos, int quntity) {
+
+        if (sessionManager.isNetworkAvailable()) {
+            binding.progressBar.setVisibility(View.VISIBLE);
+            add_to_cart_buyer(modelList.get(pos).getProductId(), String.valueOf(quntity));
+
+        }else {
+            Toast.makeText(this, R.string.checkInternet, Toast.LENGTH_SHORT).show();
+        }
     }
 
 }

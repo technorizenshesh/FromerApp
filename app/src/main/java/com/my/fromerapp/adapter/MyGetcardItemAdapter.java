@@ -5,25 +5,28 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.my.fromerapp.Preference;
 import com.my.fromerapp.R;
+import com.my.fromerapp.act.GetCartItemsActivity;
 import com.my.fromerapp.interfacesss.CarditemListener;
 import com.my.fromerapp.model.GteItemProductModelData;
 
 import java.util.ArrayList;
 
 
-public class MyGetcardItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>{
+public class MyGetcardItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder>
+{
 
     private Context mContext;
     private ArrayList<GteItemProductModelData> modelList;
     private OnItemClickListener mItemClickListener;
 
     CarditemListener carditemListener;
-
 
     public MyGetcardItemAdapter(Context context, ArrayList<GteItemProductModelData> modelList, CarditemListener carditemListener) {
         this.mContext = context;
@@ -49,9 +52,9 @@ public class MyGetcardItemAdapter extends RecyclerView.Adapter<RecyclerView.View
             final GteItemProductModelData model = getItem(position);
             final ViewHolder genericViewHolder = (ViewHolder) holder;
 
-            genericViewHolder.txtName.setText(model.getProductDetails().getName());
+            genericViewHolder.txtName.setText(""+model.getProductDetails().getName());
             genericViewHolder.txt_price.setText(model.getProductDetails().getPrice()+" per KG");
-            genericViewHolder.txtQuntity.setText("Quantity :"+model.getQty());
+            genericViewHolder.txt_quantity.setText(""+model.getQty());
 
             genericViewHolder.txtDelete.setOnClickListener(v -> {
 
@@ -64,6 +67,34 @@ public class MyGetcardItemAdapter extends RecyclerView.Adapter<RecyclerView.View
                 carditemListener.WishItem(position);
 
             });
+
+
+         genericViewHolder.RRplus.setOnClickListener(v -> {
+
+             Preference.save(mContext,Preference.KEY_seller_id,model.getSellerId());
+
+                String quntity =genericViewHolder.txt_quantity.getText().toString();
+                int i= Integer.parseInt(quntity);
+                i++;
+                carditemListener.addItem(position,i);
+                genericViewHolder.txt_quantity.setText(i + "");
+
+            });
+
+            genericViewHolder.RR_mnus1.setOnClickListener(v -> {
+
+                Preference.save(mContext,Preference.KEY_seller_id,model.getSellerId());
+
+                String quntity =genericViewHolder.txt_quantity.getText().toString();
+                int i= Integer.parseInt(quntity);
+                if (i >1) {
+                    i--;
+                    carditemListener.addItem(position,i);
+                    genericViewHolder.txt_quantity.setText(i + "");
+                }
+            });
+
+
         }
 
     }
@@ -95,6 +126,9 @@ public class MyGetcardItemAdapter extends RecyclerView.Adapter<RecyclerView.View
         private TextView txtDelete;
         private TextView txtQuntity;
         private TextView txtWishList;
+        private TextView txt_quantity;
+        private RelativeLayout RRplus;
+        private RelativeLayout RR_mnus1;
 
 
         public ViewHolder(final View itemView) {
@@ -105,12 +139,17 @@ public class MyGetcardItemAdapter extends RecyclerView.Adapter<RecyclerView.View
          this.txtDelete=itemView.findViewById(R.id.txtDelete);
          this.txtQuntity=itemView.findViewById(R.id.txtQuntity);
          this.txtWishList=itemView.findViewById(R.id.txtWishList);
+         this.RRplus=itemView.findViewById(R.id.RRplus);
+         this.RR_mnus1=itemView.findViewById(R.id.RR_mnus1);
+         this.txt_quantity=itemView.findViewById(R.id.txt_quantity);
 
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+
                     mItemClickListener.onItemClick(itemView, getAdapterPosition(), modelList.get(getAdapterPosition()));
+
                 }
             });
         }

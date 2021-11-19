@@ -57,7 +57,7 @@
                     android:text="Welcome"
                     android:textColor="@color/purple_200"
                     android:textStyle="bold"
-                    android:textSize="@dimen/_18sdp" />
+                    android:textSize="@dimen/_16sdp" />
 
                 <TextView
                     android:layout_marginTop="@dimen/_5sdp"
@@ -66,7 +66,9 @@
                     android:text="Sign in to continue"
                     android:textColor="@color/purple_200"
                     android:textStyle="bold"
-                    android:textSize="@dimen/_18sdp" />
+                    android:textSize="@dimen/_16sdp" />
+
+               <!-- buy@gmail.com-->
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/input_layout_Email"
@@ -86,6 +88,8 @@
                         android:inputType="textEmailAddress"
                         android:textColor="@color/orange" />
                 </com.google.android.material.textfield.TextInputLayout>
+
+              <!--  android:text="123456"-->
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/input_layout_Pass"

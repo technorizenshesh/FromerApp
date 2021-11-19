@@ -3,7 +3,8 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.my.fromerapp"
     android:versionCode="1"
-    android:versionName="1.0">
+    android:versionName="1.0"
+    >
 
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -34,6 +35,10 @@
             </intent-filter>
 
         </activity>
+
+        <activity android:name=".Chat.MsgChatAct"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme"/>
 
         <activity android:name=".act.PaymentOption"
             android:screenOrientation="portrait"

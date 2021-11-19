@@ -95,7 +95,7 @@ public class BottomAddToCardFragment extends BottomSheetDialogFragment {
 
         RRplus.setOnClickListener(v -> {
 
-           i++;
+             i++;
             txt_quatity.setText(i+"");
         });
 

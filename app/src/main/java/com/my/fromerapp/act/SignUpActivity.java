@@ -26,6 +26,7 @@ import com.karumi.dexter.MultiplePermissionsReport;
 import com.karumi.dexter.PermissionToken;
 import com.karumi.dexter.listener.PermissionRequest;
 import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
+import com.my.fromerapp.MainActivity;
 import com.my.fromerapp.Preference;
 import com.my.fromerapp.R;
 import com.my.fromerapp.act.Login;
@@ -276,7 +277,7 @@ public class SignUpActivity extends AppCompatActivity {
 
                     Preference.save(SignUpActivity.this,Preference.KEY_user_id,finallyPr.getResult().getId());
 
-                    startActivity(new Intent(SignUpActivity.this, SignUpActivity.class));
+                    startActivity(new Intent(SignUpActivity.this, MainActivity.class));
 
                 } else {
                     binding.progressBar.setVisibility(View.GONE);

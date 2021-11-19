@@ -97,6 +97,8 @@ public class ProducctRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
                     genericViewHolder.txt_quantity.setText(i + "");
                 }
             });
+
+
         }
 
     }
@@ -150,7 +152,9 @@ public class ProducctRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerVi
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+
                     mItemClickListener.onItemClick(itemView, getAdapterPosition(), modelList.get(getAdapterPosition()));
+
                 }
             });
         }

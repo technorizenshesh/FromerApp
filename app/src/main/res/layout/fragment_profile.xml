@@ -347,6 +347,7 @@
                 </RelativeLayout>
 
                 <RelativeLayout
+                    android:visibility="gone"
                     android:id="@+id/RRMyProduct"
                     android:layout_marginTop="@dimen/_20sdp"
                     android:layout_width="match_parent"

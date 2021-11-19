@@ -68,7 +68,6 @@ dependencies {
     implementation 'com.google.code.gson:gson:2.8.6'
     implementation 'com.applandeo:material-calendar-view:1.9.0-alpha03'
 
-
     //Google Login
     //noinspection GradleCompatible
     implementation 'com.google.firebase:firebase-messaging:9.6.1'
@@ -78,16 +77,24 @@ dependencies {
     implementation 'com.google.android.gms:play-services-auth:16.0.0'
     implementation 'com.google.firebase:firebase-auth:20.0.1'
 
+    //Firebase Token
+    implementation 'com.google.firebase:firebase-messaging:21.0.1'
+
+
     implementation "androidx.constraintlayout:constraintlayout:2.1.0"
 
     implementation 'com.makeramen:roundedimageview:2.3.0'
     implementation 'vn.nms.dseekbar:DMSeekBar:1.0.0'
     implementation 'com.braintreepayments:card-form:5.0.0'
 
-    //Firebase Token
-    implementation 'com.google.firebase:firebase-messaging:21.0.1'
-    implementation 'com.google.firebase:firebase-messaging:9.6.1'
+    //circle
+    implementation 'de.hdodenhof:circleimageview:3.0.0'
 
+    //chat
+    implementation "com.google.firebase:firebase-database:18.0.1"
+    implementation 'com.google.firebase:firebase-messaging:20.1.0'
+    implementation 'com.google.firebase:firebase-core:18.0.0'
+    implementation 'com.github.shadowalker77:wp7progressbar:1.0.5'
 }
 apply plugin: 'com.google.gms.google-services'
 
